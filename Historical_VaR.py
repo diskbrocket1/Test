@@ -1,6 +1,6 @@
 
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import kurtosis, skew
 
@@ -33,27 +33,28 @@ print("Log normal stat data: ","MAX: " + str(max(LN_dly_change)), "MIN: "+str(mi
       "MEAN: "+str(np.mean(LN_dly_change)), "STD: " +str(np.std(LN_dly_change)))
 print(f'The 1-day 99.5 Historical VaR in pct terms (assuming LogN prices) is: {historic_VaR_LN}')
 
+#########################################Plot#####################################################################
 
-#
-# fig, axs = plt.subplots(2, 1)
-# axs[0].hist(dly_pct_cng, bins=100)
-# axs[0].set_xlabel('Based on Normal Prices' + '(Skew: '+str(round(skew(dly_pct_cng),5)) + \
-#                   '; Kurtosis: '+str(round(kurtosis(dly_pct_cng),5)) + "; 99.5% VaR: " \
-#                   +str(round(np.percentile(dly_pct_cng, q=0.5, interpolation='lower'),5))+ ")")
-# axs[0].set_ylabel('Frequency')
-# fig.suptitle("Dly pct changes based on Normal and LogNormal Prices", fontsize=25)
-#
-#
-#
-# axs[1].hist(LN_dly_change, bins=100)
-# axs[1].set_xlabel('Based on LogNormal Prices' + '(Skew: '+str(round(skew(LN_dly_change),5)) + \
-#                   '; Kurtosis: '+str(round(kurtosis(LN_dly_change),5))+ "; 99.5% VaR: " \
-#                   + str(round(np.percentile(LN_dly_change, q=0.5, interpolation='lower'),5))+")")
-# axs[1].set_ylabel('Frequency')
-#
-#
-#
-# plt.show()
+
+fig, axs = plt.subplots(2, 1)
+axs[0].hist(dly_pct_cng, bins=100)
+axs[0].set_xlabel('Based on Normal Prices' + '(Skew: '+str(round(skew(dly_pct_cng),5)) + \
+                  '; Kurtosis: '+str(round(kurtosis(dly_pct_cng),5)) + "; 99.5% VaR: " \
+                  +str(round(np.percentile(dly_pct_cng, q=0.5, interpolation='lower'),5))+ ")")
+axs[0].set_ylabel('Frequency')
+fig.suptitle("Dly pct changes based on Normal and LogNormal Prices", fontsize=25)
+
+
+
+axs[1].hist(LN_dly_change, bins=100)
+axs[1].set_xlabel('Based on LogNormal Prices' + '(Skew: '+str(round(skew(LN_dly_change),5)) + \
+                  '; Kurtosis: '+str(round(kurtosis(LN_dly_change),5))+ "; 99.5% VaR: " \
+                  + str(round(np.percentile(LN_dly_change, q=0.5, interpolation='lower'),5))+")")
+axs[1].set_ylabel('Frequency')
+
+
+
+plt.show()
 
 
 
