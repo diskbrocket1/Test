@@ -1,5 +1,5 @@
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import kurtosis, skew, norm
 import yfinance as yf
@@ -21,10 +21,6 @@ df = yf.download(stocks,
                       start='2019-01-01',
                       end='2019-12-31',
                       progress=False)
-
-
-
-
 df = df["Close"].dropna()
 
 df = df.to_numpy()
@@ -64,14 +60,16 @@ for i in range(var_days):
 
 fig, axs = plt.subplots(2, 2)
 axs[0,0].hist(df_n, bins=100)
-x = np.linspace(mean_n - 4*port_std_n, mean_n + 4*port_std_n)
-axs[0,0].plot(x, norm.pdf(x,mean_n, port_std_n))
-axs[1,0].plot(var_array_n)
+x = np.linspace(float(mean_n - 4*port_std_n), float(mean_n + 4*port_std_n), 100)
+axs[0,0].plot(x, norm.pdf(x,float(mean_n), float(port_std_n)))
+axs[1,0].plot(var_array_n*-1)
 
 
 axs[0,1].hist(df_log, bins=100)
-x = np.linspace(mean_log - 4*port_std_log, mean_log + 4*port_std_log)
-axs[0,1].plot(x, norm.pdf(x,mean_log, port_std_log))
-axs[1,1].plot(var_array_log)
+x = np.linspace(float(mean_log - 4*port_std_log), float(mean_log + 4*port_std_log), 100)
+axs[0,1].plot(x, norm.pdf(x, float(mean_log), float(port_std_log)))
+axs[1,1].plot(var_array_log*-1)
+
+
 
 plt.show()
